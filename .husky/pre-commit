@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check prettier formatting, print issues, and then fix them
+npx prettier --check . || {
+  echo "Prettier found issues in the files listed above. Fixing them now..."
+  npx prettier --write .
+  echo "Prettier issues have been fixed."
+}
+
+# Check eslint issues, print issues, and then fix them
+npx eslint . || {
+  echo "ESLint found issues in the files listed above. Fixing them now..."
+  npx eslint . --fix
+  echo "ESLint issues have been fixed."
+}
